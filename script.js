@@ -23,6 +23,7 @@ const players = [
 ];
 
 let currentPage = 1;
+let deferredInstallPrompt = null;
 const pageSize = 6;
 
 const $ = (selector) => document.querySelector(selector);
@@ -35,6 +36,22 @@ function showToast(message) {
   toast.textContent = message;
   stack.appendChild(toast);
   setTimeout(() => toast.remove(), 4300);
+}
+
+async function sendLocalNotification(title, body) {
+  if (!("Notification" in window) || Notification.permission !== "granted") return;
+  if ("serviceWorker" in navigator) {
+    const registration = await navigator.serviceWorker.ready;
+    registration.showNotification(title, {
+      body,
+      icon: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'%3E%3Crect width='192' height='192' rx='42' fill='%23061a2f'/%3E%3Ccircle cx='96' cy='96' r='58' fill='%2342ff9c'/%3E%3Ctext x='96' y='118' text-anchor='middle' font-size='72'%3E%E2%9A%BD%3C/text%3E%3C/svg%3E",
+      badge: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 96 96'%3E%3Crect width='96' height='96' rx='24' fill='%23061a2f'/%3E%3Ctext x='48' y='62' text-anchor='middle' font-size='44'%3E%E2%9A%BD%3C/text%3E%3C/svg%3E",
+      tag: "footpulse-live-update",
+      dir: "rtl"
+    });
+  } else {
+    new Notification(title, { body, dir: "rtl" });
+  }
 }
 
 function renderLeagues() {
@@ -153,6 +170,7 @@ function initLiveSimulation() {
     if ($("#dribbleStat")) $("#dribbleStat").textContent = 1 + Math.floor(Math.random() * 9);
     if ($("#liveUsers")) $("#liveUsers").textContent = (18420 + Math.floor(Math.random() * 950)).toLocaleString("en-US");
     showToast(`تحديث لحظي: ${player} أصبح تقييمه ${rating}`);
+    sendLocalNotification("FootPulse تحديث لاعب", `${player} أصبح تقييمه المباشر ${rating}`);
   }, 8500);
 }
 
@@ -179,7 +197,19 @@ function initInteractions() {
     }
     $("#notifyCount").textContent = "0";
     showToast("تم تفعيل تنبيهات الأهداف والبطاقات وتحديثات اللاعبين");
+    sendLocalNotification("FootPulse", "الإشعارات اللحظية جاهزة للاعبين والدوريات التي تتابعها");
   });
+  $("#installAppBtn")?.addEventListener("click", async () => {
+    if (!deferredInstallPrompt) {
+      showToast("إن لم يظهر زر التثبيت، استخدم قائمة المتصفح ثم اختر تثبيت التطبيق أو Add to Home Screen");
+      return;
+    }
+    deferredInstallPrompt.prompt();
+    await deferredInstallPrompt.userChoice;
+    deferredInstallPrompt = null;
+  });
+  $("#iosInstallBtn")?.addEventListener("click", () => showToast("على iPhone: افتح Safari ثم مشاركة ثم Add to Home Screen"));
+  $("#apiPlanBtn")?.addEventListener("click", () => showToast("عند توفر API سنستبدل البيانات النموذجية من ملف script.js بطلبات مباشرة دون تغيير الواجهة"));
   $("#subscribeBtn")?.addEventListener("click", () => showToast("تم اختيار اشتراك الدولار الشهري — جاهز للربط ببوابة دفع"));
   $("#loginForm")?.addEventListener("submit", (event) => {
     event.preventDefault();
@@ -191,6 +221,20 @@ function initInteractions() {
 }
 
 window.addEventListener("scroll", revealVisible, { passive: true });
+window.addEventListener("beforeinstallprompt", (event) => {
+  event.preventDefault();
+  deferredInstallPrompt = event;
+  showToast("يمكنك الآن تثبيت FootPulse كتطبيق على الهاتف");
+});
+
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("/service-worker.js").catch(() => {
+      showToast("تعذر تفعيل وضع التطبيق دون اتصال حالياً");
+    });
+  });
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   renderLeagues();
   renderPlayers();
