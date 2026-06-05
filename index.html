@@ -1,36 +1,205 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>مرحباً بك في أكوادرا</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
-    <style>
-      body {
-        font-family: 'Cairo', sans-serif;
-      }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#061a2f" />
+  <meta name="description" content="تطبيق FootPulse لمجتمع كرة القدم، إحصائيات اللاعبين المباشرة، تنبيهات لحظية، واشتراك شهري بدولار واحد فقط." />
+  <title>FootPulse | مجتمع وإحصائيات كرة القدم المباشرة</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Alexandria:wght@400;500;600;700;800;900&family=Readex+Pro:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="stylesheet" href="style.css" />
 </head>
-<body class="bg-gray-100 flex items-center justify-center min-h-screen text-gray-800">
-    <div class="max-w-md w-full text-center p-6">
-        <h1 class="text-3xl font-bold text-slate-800 mb-4 tracking-tight">مرحباً بك في أكوادرا</h1>
-        <p class="text-gray-600 mb-8">
-            المنشئ الخارق الذي يساعدك على بناء تطبيقات جميلة باستخدام Tailwind CSS.
-        </p>
-        
-        <div class="bg-white p-8 rounded-xl shadow-lg border border-gray-100 hover:scale-105 transition-all duration-300 cursor-pointer card group">
-            <div class="w-12 h-12 bg-indigo-50 rounded-lg flex items-center justify-center mx-auto mb-4 group-hover:bg-indigo-100 transition-colors">
-                 <svg class="w-6 h-6 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"></path></svg>
-            </div>
-            <h2 class="text-xl font-semibold text-gray-900 mb-2">جاهز للبناء</h2>
-            <p class="text-gray-500 text-sm">اطلب من الذكاء الاصطناعي تغيير هذا التصميم أو بناء شيء جديد كلياً.</p>
-        </div>
-        
-        <div class="mt-8 text-sm text-gray-400">
-            مدعوم بواسطة Gemini 3 Pro
-        </div>
+<body>
+  <div class="stadium-orbit" aria-hidden="true">
+    <span></span><span></span><span></span><span></span>
+  </div>
+
+  <header class="site-header" id="top">
+    <a class="brand" href="/" data-route>
+      <span class="brand-mark">⚽</span>
+      <span><strong>FootPulse</strong><small>نبض الكرة المباشر</small></span>
+    </a>
+    <button class="menu-toggle" type="button" aria-label="فتح القائمة" aria-expanded="false">☰</button>
+    <nav class="main-nav" aria-label="التنقل الرئيسي">
+      <a href="/" data-route>الرئيسية</a>
+      <a href="/leagues" data-route>الدوريات</a>
+      <a href="/players" data-route>إحصائيات اللاعبين</a>
+      <a href="/community" data-route>المجتمع</a>
+      <a href="/pricing" data-route>الاشتراك</a>
+    </nav>
+    <div class="header-actions">
+      <button class="icon-btn" id="notifyBtn" type="button" aria-label="تفعيل الإشعارات"><span>🔔</span><b id="notifyCount">3</b></button>
+      <a class="ghost-btn" href="/login" data-route>تسجيل الدخول</a>
+      <a class="primary-btn small" href="/pricing" data-route>ابدأ بدولار</a>
     </div>
-    <script src="script.js"></script>
+  </header>
+
+  <main id="app">
+    <section class="page active" data-page="/">
+      <div class="hero section-shell">
+        <div class="hero-copy reveal">
+          <p class="eyebrow"><span class="live-dot"></span> تحديثات لحظية بدون قسم أخبار وبدون لوحة تحكم</p>
+          <h1>مجتمع كرة قدم حيّ يرى أرقام اللاعب تتحرك مع كل دقيقة.</h1>
+          <p class="hero-lead">FootPulse تجربة عربية مخصصة للجماهير على Android و iPhone: إحصائيات اللاعبين المباشرة، تنبيهات ذكية، نقاشات جماهيرية، وتغطية للدوري الإنجليزي والإسباني وأبطال أوروبا وكأس العالم والإيطالي والسعودي.</p>
+          <div class="hero-actions">
+            <a class="primary-btn" href="/players" data-route>شاهد الإحصائيات الآن</a>
+            <a class="store-btn" href="/pricing" data-route><span>📱</span> تطبيق iPhone و Android</a>
+          </div>
+          <div class="trust-row" aria-label="مؤشرات التطبيق">
+            <span><strong id="liveUsers">18,420</strong> مشجع متصل</span>
+            <span><strong>$1</strong> فقط شهرياً</span>
+            <span><strong>6</strong> بطولات رئيسية</span>
+          </div>
+        </div>
+
+        <div class="hero-visual reveal depth-card" data-tilt>
+          <div class="phone-frame">
+            <div class="phone-top"></div>
+            <div class="match-strip">
+              <span>LIVE 63'</span>
+              <b>Man City 2 - 1 Real Madrid</b>
+            </div>
+            <div class="player-spotlight">
+              <div class="avatar-ball">10</div>
+              <div>
+                <small>تقييم اللاعب المباشر</small>
+                <h3 id="heroPlayerName">محمد صلاح</h3>
+                <div class="rating"><span id="heroRating">8.7</span><i style="width:87%"></i></div>
+              </div>
+            </div>
+            <div class="pitch-3d">
+              <span class="heat heat-a"></span><span class="heat heat-b"></span><span class="heat heat-c"></span>
+              <div class="route-line"></div>
+            </div>
+            <div class="mini-stats">
+              <article><small>تسديدات</small><strong id="shotStat">4</strong></article>
+              <article><small>تمريرات</small><strong id="passStat">51</strong></article>
+              <article><small>مراوغات</small><strong id="dribbleStat">6</strong></article>
+            </div>
+          </div>
+          <div class="floating-badge badge-one">هدف متوقع 0.42 xG</div>
+          <div class="floating-badge badge-two">تنبيه: صناعة فرصة</div>
+        </div>
+      </div>
+
+      <section class="section-shell league-ribbon reveal">
+        <div class="section-heading compact">
+          <p class="eyebrow">البطولات المطلوبة</p>
+          <h2>تغطية مباشرة للبطولات الأكثر متابعة</h2>
+        </div>
+        <div class="league-track" id="leagueTrack"></div>
+      </section>
+
+      <section class="section-shell split-section reveal">
+        <div class="section-heading">
+          <p class="eyebrow">فكرة بصرية لا تُنسى</p>
+          <h2>ملعب بيانات ثلاثي الأبعاد يتحرك أثناء التمرير</h2>
+          <p>كل تمريرة، تسديدة، تدخل، لمسة، وخريطة حرارة تظهر كطبقات متحركة فوق أرضية ملعب رقمية، مع تحديثات وهمية جاهزة للربط لاحقاً بمزود بيانات رسمي عند توفر API.</p>
+        </div>
+        <div class="feature-grid">
+          <article class="feature-card" data-tilt><span>⚡</span><h3>إحصائيات لحظية</h3><p>تغيّر أرقام اللاعب بصرياً خلال المباراة مع مؤشرات صعود وهبوط واضحة.</p></article>
+          <article class="feature-card" data-tilt><span>👥</span><h3>مجتمع الجماهير</h3><p>مساحات نقاش وتوقعات وتصويت لأفضل لاعب بدون قسم أخبار.</p></article>
+          <article class="feature-card" data-tilt><span>🔔</span><h3>إشعارات ذكية</h3><p>تنبيهات للأهداف، البطاقات، تبديل اللاعب، وبلوغ أرقام قياسية.</p></article>
+          <article class="feature-card" data-tilt><span>🔐</span><h3>تسجيل دخول</h3><p>واجهة دخول واشتراك تحفظ حالة المستخدم محلياً كنموذج إنتاجي للواجهة.</p></article>
+        </div>
+      </section>
+    </section>
+
+    <section class="page" data-page="/leagues">
+      <div class="section-shell page-hero reveal">
+        <p class="eyebrow">مسارات /leagues</p>
+        <h1>الدوريات والبطولات داخل تجربة واحدة</h1>
+        <p>اختر بطولة لمتابعة اللاعبين والمباريات المتحركة. التطبيق لا يعتمد حالياً على API خارجي؛ البيانات المعروضة نموذج حي قابل للاستبدال بمزود رسمي.</p>
+      </div>
+      <div class="section-shell league-grid" id="leagueGrid"></div>
+    </section>
+
+    <section class="page" data-page="/players">
+      <div class="section-shell page-hero reveal">
+        <p class="eyebrow">مسار /players</p>
+        <h1>إحصائيات اللاعبين كاملة ومباشرة</h1>
+        <p>فلترة، فرز، ترقيم صفحات، ومؤشرات أداء مباشرة لكل لاعب: أهداف، صناعة، تسديدات، تمريرات، دقائق، تقييم، xG، افتكاكات، وبطاقات.</p>
+      </div>
+      <div class="section-shell controls-panel reveal">
+        <label>بحث اللاعب<input id="playerSearch" type="search" placeholder="اكتب اسم لاعب أو نادي" /></label>
+        <label>البطولة<select id="leagueFilter"><option value="all">كل البطولات</option></select></label>
+        <label>فرز حسب<select id="sortSelect"><option value="rating">التقييم</option><option value="goals">الأهداف</option><option value="assists">الصناعة</option><option value="passes">التمريرات</option></select></label>
+      </div>
+      <div class="section-shell stats-layout">
+        <aside class="live-console reveal">
+          <h2>لوحة نبض مباشرة</h2>
+          <p>ليست لوحة تحكم إدارية؛ إنها شاشة متابعة جماهيرية تعرض آخر تغييرات اللاعبين.</p>
+          <ul id="eventFeed"></ul>
+        </aside>
+        <div class="players-panel reveal">
+          <div class="panel-title"><h2>قائمة اللاعبين</h2><span id="resultCount"></span></div>
+          <div id="playersGrid" class="players-grid"></div>
+          <div class="pagination"><button id="prevPage" type="button">السابق</button><span id="pageInfo"></span><button id="nextPage" type="button">التالي</button></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="page" data-page="/community">
+      <div class="section-shell page-hero reveal">
+        <p class="eyebrow">مسار /community</p>
+        <h1>مجتمع كرة القدم بدون ضوضاء الأخبار</h1>
+        <p>المحتوى هنا للنقاشات والتوقعات والتصويت فقط، حتى يبقى التطبيق مركزاً على الإحصائيات المباشرة واللاعبين.</p>
+      </div>
+      <div class="section-shell community-grid reveal">
+        <article class="discussion-card hot"><span>تصويت مباشر</span><h3>من أفضل لاعب في الجولة؟</h3><div class="vote-bars"><p><b>بيلينغهام</b><i style="width:72%"></i></p><p><b>هالاند</b><i style="width:61%"></i></p><p><b>سالم الدوسري</b><i style="width:48%"></i></p></div><button type="button">صوّت الآن</button></article>
+        <article class="discussion-card"><span>نقاش جماهيري</span><h3>هل التقييم المباشر أكثر عدلاً من رجل المباراة؟</h3><p>423 مشاركة نشطة الآن مع فلترة احترام المجتمع ومنع الروابط المزعجة.</p><button type="button">ادخل النقاش</button></article>
+        <article class="discussion-card"><span>توقعات</span><h3>توقع نتيجة مباراة الليلة واربح شارة محلل الأسبوع</h3><p>نظام شارات يحفّز التفاعل داخل المجتمع بدون تحويله لمنصة أخبار.</p><button type="button">ضع توقعك</button></article>
+      </div>
+    </section>
+
+    <section class="page" data-page="/pricing">
+      <div class="section-shell pricing-hero reveal">
+        <div>
+          <p class="eyebrow">مسار /pricing</p>
+          <h1>اشتراك شهري واضح: دولار واحد فقط</h1>
+          <p>كل الإحصائيات، التنبيهات، المجتمع، وتطبيقات الهاتف في خطة واحدة. لا توجد أخبار ولا لوحة تحكم إدارية معقدة.</p>
+        </div>
+        <article class="price-card" data-tilt>
+          <span class="save-pill">للجماهير</span>
+          <h2>$1<small>/شهرياً</small></h2>
+          <ul><li>إحصائيات جميع اللاعبين</li><li>تنبيهات لحظية قابلة للتخصيص</li><li>الدوريات المطلوبة بالكامل</li><li>تطبيق Android و iPhone كتجربة PWA جاهزة</li><li>مجتمع وتوقعات وتصويت</li></ul>
+          <button class="primary-btn" id="subscribeBtn" type="button">اشترك الآن</button>
+        </article>
+      </div>
+      <div class="section-shell app-platforms reveal">
+        <article><span>🤖</span><h3>Android</h3><p>تصميم قابل للتحويل إلى تطبيق Android عبر Capacitor أو Trusted Web Activity.</p></article>
+        <article><span>🍎</span><h3>iPhone</h3><p>واجهة PWA محسنة للشاشة الرئيسية مع قابلية تغليفها كتطبيق iOS لاحقاً.</p></article>
+        <article><span>🔌</span><h3>بدون API حالياً</h3><p>تم بناء طبقة بيانات وهمية مباشرة، وعند توفر API يمكن ربط نفس الواجهة دون تغيير التجربة.</p></article>
+      </div>
+    </section>
+
+    <section class="page" data-page="/login">
+      <div class="section-shell auth-shell reveal">
+        <div class="auth-copy">
+          <p class="eyebrow">مسار /login</p>
+          <h1>ادخل إلى حسابك الجماهيري</h1>
+          <p>سجّل الدخول لتفعيل التنبيهات ومتابعة لاعبيك المفضلين وحفظ اشتراك الدولار الشهري.</p>
+          <div class="security-card"><b>🔐 حماية الحساب</b><span>واجهة جاهزة للربط لاحقاً بقاعدة بيانات ومزود تسجيل دخول حقيقي.</span></div>
+        </div>
+        <form class="auth-form" id="loginForm">
+          <label>البريد الإلكتروني<input type="email" name="email" placeholder="fan@footpulse.app" required /></label>
+          <label>كلمة المرور<input type="password" name="password" placeholder="••••••••" required minlength="6" /></label>
+          <button class="primary-btn" type="submit">تسجيل الدخول</button>
+          <p id="loginMessage" role="status"></p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div><strong>FootPulse</strong><p>تطبيق كرة قدم عربي مباشر للاعبين، المجتمع، والإشعارات. لا أخبار. لا لوحة تحكم. فقط نبض الملعب.</p></div>
+    <nav><a href="/leagues" data-route>الدوريات</a><a href="/players" data-route>اللاعبون</a><a href="/community" data-route>المجتمع</a><a href="/login" data-route>دخول</a></nav>
+  </footer>
+
+  <div class="toast-stack" id="toastStack" aria-live="polite"></div>
+  <script src="script.js"></script>
 </body>
 </html>
