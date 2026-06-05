@@ -4,6 +4,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="theme-color" content="#061a2f" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="FootPulse" />
   <meta name="description" content="تطبيق FootPulse لمجتمع كرة القدم، إحصائيات اللاعبين المباشرة، تنبيهات لحظية، واشتراك شهري بدولار واحد فقط." />
   <title>FootPulse | مجتمع وإحصائيات كرة القدم المباشرة</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -170,9 +173,9 @@
         </article>
       </div>
       <div class="section-shell app-platforms reveal">
-        <article><span>🤖</span><h3>Android</h3><p>تصميم قابل للتحويل إلى تطبيق Android عبر Capacitor أو Trusted Web Activity.</p></article>
-        <article><span>🍎</span><h3>iPhone</h3><p>واجهة PWA محسنة للشاشة الرئيسية مع قابلية تغليفها كتطبيق iOS لاحقاً.</p></article>
-        <article><span>🔌</span><h3>بدون API حالياً</h3><p>تم بناء طبقة بيانات وهمية مباشرة، وعند توفر API يمكن ربط نفس الواجهة دون تغيير التجربة.</p></article>
+        <article><span>🤖</span><h3>Android</h3><p>تطبيق PWA قابل للتثبيت فوراً، ويمكن تغليفه لاحقاً عبر Capacitor أو Trusted Web Activity.</p><button class="install-btn" id="installAppBtn" type="button">تثبيت التطبيق</button></article>
+        <article><span>🍎</span><h3>iPhone</h3><p>واجهة محسنة للشاشة الرئيسية على iOS مع تعليمات تثبيت مباشرة من Safari.</p><button class="install-btn secondary" id="iosInstallBtn" type="button">طريقة التثبيت</button></article>
+        <article><span>🔌</span><h3>بدون API حالياً</h3><p>تم بناء طبقة بيانات نموذجية مباشرة مع نقطة ربط واضحة لمزود بيانات رسمي مستقبلاً.</p><button class="install-btn secondary" id="apiPlanBtn" type="button">خطة ربط API</button></article>
       </div>
     </section>
 
